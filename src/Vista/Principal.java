@@ -16,6 +16,11 @@ public class Principal extends javax.swing.JFrame {
     /**
      * Creates new form Principal
      */
+    public static Principal principal = new Principal();
+    private static VentanaAnalisis analisis = new VentanaAnalisis();
+    private static VentanaSismos sismos = new VentanaSismos();
+    private static VentanaNotificaciones notificaciones = new VentanaNotificaciones();
+    
     public Principal() {
         super("Ventana principal");
         initComponents();
@@ -32,12 +37,13 @@ public class Principal extends javax.swing.JFrame {
 
         PanelPrincipal = new javax.swing.JPanel();
         Titulo = new javax.swing.JLabel();
-        analisis = new javax.swing.JButton();
-        salir = new javax.swing.JButton();
-        sismos = new javax.swing.JButton();
-        notificaciones = new javax.swing.JButton();
+        btnAnalisis = new javax.swing.JButton();
+        btnSalir = new javax.swing.JButton();
+        BtnSismos = new javax.swing.JButton();
+        btnNotificaciones = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setLocationByPlatform(true);
 
         PanelPrincipal.setBackground(new java.awt.Color(240, 168, 96));
 
@@ -48,51 +54,50 @@ public class Principal extends javax.swing.JFrame {
         Titulo.setText(bundle.getString("Principal.Titulo.text")); // NOI18N
         Titulo.setToolTipText(bundle.getString("Principal.Titulo.toolTipText")); // NOI18N
 
-        analisis.setBackground(new java.awt.Color(248, 204, 87));
-        analisis.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        analisis.setForeground(new java.awt.Color(255, 255, 255));
-        analisis.setText(bundle.getString("Principal.analisis.text")); // NOI18N
-        analisis.setBorderPainted(false);
-        analisis.setPreferredSize(null);
-        analisis.addActionListener(new java.awt.event.ActionListener() {
+        btnAnalisis.setBackground(new java.awt.Color(248, 204, 87));
+        btnAnalisis.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btnAnalisis.setForeground(new java.awt.Color(255, 255, 255));
+        btnAnalisis.setText(bundle.getString("Principal.btnAnalisis.text")); // NOI18N
+        btnAnalisis.setBorderPainted(false);
+        btnAnalisis.setPreferredSize(null);
+        btnAnalisis.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                analisisActionPerformed(evt);
+                btnAnalisisActionPerformed(evt);
             }
         });
 
-        salir.setBackground(new java.awt.Color(248, 204, 87));
-        salir.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        salir.setForeground(new java.awt.Color(255, 255, 255));
-        salir.setText(bundle.getString("Principal.salir.text")); // NOI18N
-        salir.setBorderPainted(false);
-        salir.setPreferredSize(null);
-        salir.addActionListener(new java.awt.event.ActionListener() {
+        btnSalir.setBackground(new java.awt.Color(248, 204, 87));
+        btnSalir.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btnSalir.setForeground(new java.awt.Color(255, 255, 255));
+        btnSalir.setText(bundle.getString("Principal.btnSalir.text")); // NOI18N
+        btnSalir.setBorderPainted(false);
+        btnSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                salirActionPerformed(evt);
+                btnSalirActionPerformed(evt);
             }
         });
 
-        sismos.setBackground(new java.awt.Color(248, 204, 87));
-        sismos.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        sismos.setForeground(new java.awt.Color(255, 255, 255));
-        sismos.setText(bundle.getString("Principal.sismos.text")); // NOI18N
-        sismos.setBorderPainted(false);
-        sismos.setPreferredSize(null);
-        sismos.addActionListener(new java.awt.event.ActionListener() {
+        BtnSismos.setBackground(new java.awt.Color(248, 204, 87));
+        BtnSismos.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        BtnSismos.setForeground(new java.awt.Color(255, 255, 255));
+        BtnSismos.setText(bundle.getString("Principal.BtnSismos.text")); // NOI18N
+        BtnSismos.setBorderPainted(false);
+        BtnSismos.setPreferredSize(null);
+        BtnSismos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                sismosActionPerformed(evt);
+                BtnSismosActionPerformed(evt);
             }
         });
 
-        notificaciones.setBackground(new java.awt.Color(248, 204, 87));
-        notificaciones.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        notificaciones.setForeground(new java.awt.Color(255, 255, 255));
-        notificaciones.setText(bundle.getString("Principal.notificaciones.text")); // NOI18N
-        notificaciones.setBorderPainted(false);
-        notificaciones.setPreferredSize(null);
-        notificaciones.addActionListener(new java.awt.event.ActionListener() {
+        btnNotificaciones.setBackground(new java.awt.Color(248, 204, 87));
+        btnNotificaciones.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btnNotificaciones.setForeground(new java.awt.Color(255, 255, 255));
+        btnNotificaciones.setText(bundle.getString("Principal.btnNotificaciones.text")); // NOI18N
+        btnNotificaciones.setBorderPainted(false);
+        btnNotificaciones.setPreferredSize(null);
+        btnNotificaciones.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                notificacionesActionPerformed(evt);
+                btnNotificacionesActionPerformed(evt);
             }
         });
 
@@ -107,16 +112,16 @@ public class Principal extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelPrincipalLayout.createSequentialGroup()
                 .addContainerGap(129, Short.MAX_VALUE)
                 .addGroup(PanelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(sismos, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(notificaciones, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(BtnSismos, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnNotificaciones, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(117, 117, 117)
                 .addGroup(PanelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(salir, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(analisis, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnAnalisis, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(126, 126, 126))
         );
 
-        PanelPrincipalLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {analisis, notificaciones, salir, sismos});
+        PanelPrincipalLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {BtnSismos, btnAnalisis, btnNotificaciones, btnSalir});
 
         PanelPrincipalLayout.setVerticalGroup(
             PanelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -125,16 +130,16 @@ public class Principal extends javax.swing.JFrame {
                 .addComponent(Titulo, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(47, 47, 47)
                 .addGroup(PanelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(analisis, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(sismos, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnAnalisis, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(BtnSismos, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(61, 61, 61)
                 .addGroup(PanelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(notificaciones, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(salir, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnNotificaciones, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(98, Short.MAX_VALUE))
         );
 
-        PanelPrincipalLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {analisis, notificaciones, salir, sismos});
+        PanelPrincipalLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {BtnSismos, btnAnalisis, btnNotificaciones, btnSalir});
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -150,21 +155,24 @@ public class Principal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void analisisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_analisisActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_analisisActionPerformed
+    private void btnAnalisisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnalisisActionPerformed
+        principal.setVisible(false);
+        analisis.setVisible(true);
+    }//GEN-LAST:event_btnAnalisisActionPerformed
 
-    private void salirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salirActionPerformed
+    private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
         System.exit(0);
-    }//GEN-LAST:event_salirActionPerformed
+    }//GEN-LAST:event_btnSalirActionPerformed
 
-    private void sismosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sismosActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_sismosActionPerformed
+    private void BtnSismosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSismosActionPerformed
+        principal.setVisible(false);
+        sismos.setVisible(true);
+    }//GEN-LAST:event_BtnSismosActionPerformed
 
-    private void notificacionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_notificacionesActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_notificacionesActionPerformed
+    private void btnNotificacionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNotificacionesActionPerformed
+        principal.setVisible(false);
+        notificaciones.setVisible(true);
+    }//GEN-LAST:event_btnNotificacionesActionPerformed
 
     /**
      * @param args the command line arguments
@@ -176,16 +184,15 @@ public class Principal extends javax.swing.JFrame {
         } catch(Exception e){
             System.out.println(e);
         }
-        Principal ventanaPrincipal = new Principal();
-        ventanaPrincipal.setVisible(true);
+        principal.setVisible(true);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public javax.swing.JButton BtnSismos;
     public javax.swing.JPanel PanelPrincipal;
     public javax.swing.JLabel Titulo;
-    public javax.swing.JButton analisis;
-    public javax.swing.JButton notificaciones;
-    public javax.swing.JButton salir;
-    public javax.swing.JButton sismos;
+    public javax.swing.JButton btnAnalisis;
+    public javax.swing.JButton btnNotificaciones;
+    public javax.swing.JButton btnSalir;
     // End of variables declaration//GEN-END:variables
 }

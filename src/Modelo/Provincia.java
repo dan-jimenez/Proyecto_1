@@ -1,8 +1,7 @@
 package Modelo;
 
 public enum Provincia{
-    SANJOSE, ALAJUELA, CARTAGO, HEREDIA, GUANACASTE, PUNTARENAS, LIMON;
+    SANJOSE, ALAJUELA, CARTAGO, HEREDIA, GUANACASTE, PUNTARENAS, LIMON, MAR;
 
-    private Provincia(){}
 }
 

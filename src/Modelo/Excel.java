@@ -6,6 +6,7 @@
 package Modelo;
 
 import java.io.*;
+import java.util.ArrayList;
 import java.util.Iterator;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
@@ -23,10 +24,21 @@ public class Excel {
     private String hoja;
     private String[] header;
     private String[][] datos;
+    private ArrayList<ArrayList<String>> datosLeidos;
     
+    /**
+     *
+     */
     public Excel() {
     }
 
+    /**
+     *
+     * @param nombreArchivo
+     * @param hoja
+     * @param header
+     * @param datos
+     */
     public Excel(String nombreArchivo, String hoja, String[] header, String[][] datos) {
         this.nombreArchivo = nombreArchivo+".xlsx";
         this.hoja = hoja;
@@ -34,39 +46,74 @@ public class Excel {
         this.datos = datos;
     }
     
-
+    /**
+     *
+     * @return
+     */
     public String getNombreArchivo() {
         return nombreArchivo;
     }
 
+    /**
+     *
+     * @param nombreArchivo
+     */
     public void setNombreArchivo(String nombreArchivo) {
         this.nombreArchivo = nombreArchivo;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getHoja() {
         return hoja;
     }
 
+    /**
+     *
+     * @param hoja
+     */
     public void setHoja(String hoja) {
         this.hoja = hoja;
     }
 
+    /**
+     *
+     * @return
+     */
     public String[] getHeader() {
         return header;
     }
 
+    /**
+     *
+     * @param header
+     */
     public void setHeader(String[] header) {
         this.header = header;
     }
 
+    /**
+     *
+     * @return
+     */
     public String[][] getDatos() {
         return datos;
     }
 
+    /**
+     *
+     * @param datos
+     */
     public void setDatos(String[][] datos) {
         this.datos = datos;
     }
     
+    /**
+     *
+     * @param nombreExcel
+     */
     public void LeerExcel(String nombreExcel){
         try(FileInputStream file = new FileInputStream(new File(nombreExcel))){
             //Leer archivo de Excel
@@ -97,8 +144,14 @@ public class Excel {
         }
     }
     
+    /**
+     *
+     * @param nombreArchivo
+     * @param hoja
+     * @param header
+     * @param datos
+     */
     public void EscribirExcel(String nombreArchivo, String hoja, String[] header, String[][] datos) {
-        
         XSSFWorkbook libro = new XSSFWorkbook();
         XSSFSheet hoja1 = libro.createSheet(hoja);
         
@@ -120,7 +173,69 @@ public class Excel {
             System.out.println("SE CREO EL EXCEL");
             libro.write(fileOut);
         } catch(IOException e) {
-            e.printStackTrace();
         }
     }   
+    
+    /**
+     *
+     * @param archivo
+     */
+    public void TrasladarExcel(String archivo){ 
+        ArrayList<String> fila = new ArrayList(); 
+        datosLeidos = new ArrayList();
+        
+        try(FileInputStream file = new FileInputStream(new File(archivo))){
+            //Leer archivo de Excel
+            XSSFWorkbook libro = new XSSFWorkbook(file);
+            // Obtener la hoja que se va a leer
+            XSSFSheet sheet = libro.getSheetAt(0);
+            // Obtener todas las filas de la hoja de Excel
+            Iterator<Row> rowIterator = sheet.iterator();
+            
+            Row row;
+            // Se recorre cada fila hasta el final
+            while(rowIterator.hasNext()) {
+                row = rowIterator.next();
+                // Se obtienen las celdas por fila
+                Iterator<Cell> cellIterator = row.cellIterator();
+                Cell cell;
+                // Se recorre cada celda
+                while(cellIterator.hasNext()) {
+                    // Se obtiene la celda en especifico y se imprime
+                    cell = cellIterator.next();
+                    fila.add(cell.getStringCellValue());
+                }
+                datosLeidos.add(fila);
+                fila = new ArrayList();
+            }
+            
+        } catch(Exception e) {
+            e.getMessage();
+        }
+    }
+
+    /**
+     *
+     * @return
+     */
+    public ArrayList<ArrayList<String>> getDatosLeidos() {
+        return datosLeidos;
+    }
+    
+    /**
+     *
+     * @param lista
+     */
+    public void imprimirLista(ArrayList lista){ 
+            int count=0; 
+            while(count<lista.size()){ 
+                System.out.println(lista.get(count)); 
+                count++; 
+            } 
+        }
+                
+    
+    
+    
+    
 }
